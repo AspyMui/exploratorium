@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "45420a58cd64482a",
+        "id": "591d8f8bc6dd37bd",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
             "file": "three.js-notes.md",
-            "mode": "source"
+            "mode": "preview"
           }
         }
       }
@@ -52,7 +52,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "f94430ffb5fd1e63",
@@ -86,7 +87,7 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "45420a58cd64482a",
+  "active": "591d8f8bc6dd37bd",
   "lastOpenFiles": [
     "three.js-notes.md"
   ]
