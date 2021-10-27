@@ -19,21 +19,51 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// Lets make a cube, yay!
-// Setup a basic box geometry. I assume this is some sort of mesh
-const geometry = new THREE.BoxGeometry();
+// Some basic materials to work with
+const materials = {
+  red: new THREE.MeshBasicMaterial({ color: 0xff0000 }),
+  green: new THREE.MeshBasicMaterial({ color: 0x00ff00 }),
+  blue: new THREE.MeshBasicMaterial({ color: 0x0000ff }),
+  aspyAmber: new THREE.MeshBasicMaterial({ color: 0xf4c430, wireframe: true }),
+  desCyan: new THREE.MeshBasicMaterial({ color: 0x00fffa, wireframe: true })
+};
 
-// Setup a basic mesh material. Looks like color is in hex format and needs leading 0x
-const mat1 = new THREE.MeshBasicMaterial({ color: 0xf4c430 });
-const mat2 = new THREE.MeshBasicMaterial({ color: 0xf40000 });
+//////////////////////////
+// LEARNING ABOUT CUBES //
+//////////////////////////
 
-// Setup an actual mesh with the geometry mesh and the material mesh
-const cubes = [new THREE.Mesh(geometry, mat1), new THREE.Mesh(geometry, mat2)];
+// BoxGeometry | I believe geometries are used to define basic shapes in three.js
+const boxGeo = new THREE.BoxGeometry();
+// Setting up an array of cubes
+const cubes = [
+  new THREE.Mesh(boxGeo, materials.aspyAmber),
+  new THREE.Mesh(boxGeo, materials.desCyan)
+];
 
+// Just setting some basic positioning
 cubes[0].translateX(-2.5);
 cubes[1].translateX(2.5);
 
+// Add cubes to scene
 scene.add(...cubes);
+
+//////////////////////////
+// LEARNING ABOUT LINES //
+//////////////////////////
+
+//create a blue LineBasicMaterial
+const material = new THREE.LineBasicMaterial({ color: 0x0000ff, linewidth: 5 });
+const points = [];
+points.push(new THREE.Vector3(0, 0, 0));
+points.push(new THREE.Vector3(1, 0, 0));
+points.push(new THREE.Vector3(1, 1, 0));
+points.push(new THREE.Vector3(0, 1, 0));
+points.push(new THREE.Vector3(0, 0, 0));
+
+const geometry = new THREE.BufferGeometry().setFromPoints(points);
+const line = new THREE.Line(geometry, material);
+
+scene.add(line);
 
 // Set camera z location to 5? Why 5?
 camera.position.z = 5;
