@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "three.js-notes.md",
+            "file": "BRB.md",
             "mode": "preview"
           }
         }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "three.js-notes.md",
+                "file": "BRB.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,7 +89,7 @@
   },
   "active": "591d8f8bc6dd37bd",
   "lastOpenFiles": [
-    "three.js-notes.md",
-    "BRB.md"
+    "BRB.md",
+    "three.js-notes.md"
   ]
 }
