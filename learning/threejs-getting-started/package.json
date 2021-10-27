@@ -1,0 +1,20 @@
+{
+  "name": "threejs-getting-started",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "watch": "parcel watch",
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "AspyMui",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.133.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0"
+  }
+}
