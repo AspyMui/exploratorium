@@ -1,7 +1,24 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import Stats from 'three/examples/jsm/libs/stats.module';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+
+// TODO: Figure out how to import static files from parcel
+// TODO: Load static gltf file into GLTFLoader to get it into scene
+// NOTE: Docs: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
+
+// const loader = new GLTFLoader();
+// loader.load(
+//   '/shiba',
+//   function (gltf) {
+//     scene.add(gltf.scene);
+//   },
+//   undefined,
+//   function (error) {
+//     console.error(error);
+//   }
+// );
 
 // Scene
 const scene = new THREE.Scene();
@@ -56,15 +73,6 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.damping = 0.2;
 controls.addEventListener('change', render);
-
-// Some basic materials to work with
-const materials = {
-  red: new THREE.MeshLambertMaterial({ color: 0xff0000 }),
-  green: new THREE.MeshLambertMaterial({ color: 0x00ff00 }),
-  blue: new THREE.MeshLambertMaterial({ color: 0x0000ff }),
-  aspyAmber: new THREE.MeshLambertMaterial({ color: 0xf4c430 }),
-  desCyan: new THREE.MeshLambertMaterial({ color: 0x00fffa })
-};
 
 // Helper stats to show fps
 const stats = new Stats();
