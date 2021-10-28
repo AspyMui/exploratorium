@@ -1,11 +1,10 @@
 // Path Data
-import paths from './paths.json';
+import paths from './path-data.json';
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import Stats from 'three/examples/jsm/libs/stats.module';
-import { PointLightShadow } from 'three';
 
 // Scene
 const scene = new THREE.Scene();
@@ -61,12 +60,21 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.damping = 0.2;
 controls.addEventListener('change', render);
 
-// const transformControl = new TransformControls(camera, renderer.domElement);
-// transformControl.addEventListener('change', render);
-// transformControl.addEventListener('dragging-changed', function (event) {
-//   controls.enabled = !event.value;
-// });
-// scene.add(transformControl);
+// GUI
+const settings = {
+  pathSet: 0
+};
+const gui = new GUI();
+gui
+  .add(
+    settings,
+    'pathSet',
+    paths.map((_, i) => i)
+  )
+  .name('Path Set')
+  .onChange(() => {
+    loadPathSet(paths[settings.pathSet]);
+  });
 
 // Some basic materials to work with
 const materials = {
@@ -100,36 +108,47 @@ class Cube {
 
 class Path {
   constructor(points, scene, options = {}) {
-    this.points = points.map(point => new THREE.Vector3(point[0], 0, point[1]));
+    const MULTIPLIER = 20;
+
+    this.points = points.map(
+      point =>
+        new THREE.Vector3(point[0] * MULTIPLIER, 0, point[1] * MULTIPLIER)
+    );
     this.material = options.hasOwnProperty('material')
       ? options.material
       : new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
     this.geometry = new THREE.BufferGeometry().setFromPoints(this.points);
     this.mesh = new THREE.Line(this.geometry, this.material);
 
+    this._circles = [];
+
     // Line Vertices
-    this.pointRadius = options.hasOwnProperty('pointRadius')
-      ? options.pointRadius
-      : 0;
     points.forEach(point => {
-      const geometry = new THREE.CircleGeometry(this.pointRadius, 32);
+      const radius = point[3] / 200; // TODO: Figure out good radius calculation
+      const geometry = new THREE.CircleGeometry(radius, 32);
       const circle = new THREE.Mesh(geometry, this.material);
-      circle.position.x = point[0];
-      circle.position.z = point[1];
+      circle.position.x = point[0] * MULTIPLIER;
+      circle.position.z = point[1] * MULTIPLIER;
       circle.rotateX(-Math.PI / 2);
-      scene.add(circle);
+      this._circles.push(circle);
     });
 
-    scene.add(this.mesh);
+    scene.add(...this._circles, this.mesh);
+  }
+
+  destroy() {
+    scene.remove(this.mesh, ...this._circles);
   }
 }
 
-paths.forEach(set => {
-  // Build path set
-  // set.nodes
-  // set.id
-  let path = new Path(set.nodes, scene, { pointRadius: 1 });
-});
+let currentPathSet;
+function loadPathSet(set) {
+  if (currentPathSet) {
+    currentPathSet.destroy();
+  }
+  console.log(set);
+  currentPathSet = new Path(set.nodes, scene);
+}
 
 // Helper stats to show fps
 const stats = new Stats();
