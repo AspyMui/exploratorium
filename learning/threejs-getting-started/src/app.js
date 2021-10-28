@@ -1,5 +1,5 @@
 // Path Data
-import paths from './path-data.json';
+import paths from './paths.json';
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -85,27 +85,6 @@ const materials = {
   desCyan: new THREE.MeshLambertMaterial({ color: 0x00fffa })
 };
 
-// Simple Cube Class
-class Cube {
-  constructor(material, scene) {
-    this.material = material;
-    this.geometry = new THREE.BoxGeometry(10, 10, 10);
-    this.mesh = new THREE.Mesh(this.geometry, this.material);
-    this.mesh.castShadow = true;
-    this.mesh.receiveShadow = true;
-    this.mesh.position.y = 10;
-
-    scene.add(this.mesh);
-  }
-
-  animate() {
-    this.mesh.rotation.x += 0.01;
-    this.mesh.rotation.y += 0.01;
-  }
-}
-
-// const testCube = new Cube(materials.aspyAmber, scene);
-
 class Path {
   constructor(points, scene, options = {}) {
     const MULTIPLIER = 20;
@@ -141,7 +120,7 @@ class Path {
   }
 }
 
-let currentPathSet;
+let currentPathSet = new Path(paths[settings.pathSet].nodes, scene);
 function loadPathSet(set) {
   if (currentPathSet) {
     currentPathSet.destroy();
