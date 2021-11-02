@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "BRB.md",
-            "mode": "preview"
+            "file": "Stream Goals/2021-11-02.md",
+            "mode": "source"
           }
         }
       }
@@ -39,7 +39,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "tag:#threejs",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "BRB.md",
+                "file": "Stream Goals/2021-11-02.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -79,8 +79,17 @@
                 "unlinkedCollapsed": true
               }
             }
+          },
+          {
+            "id": "b670d24e6460b875",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -89,7 +98,9 @@
   },
   "active": "591d8f8bc6dd37bd",
   "lastOpenFiles": [
-    "BRB.md",
-    "three.js-notes.md"
+    "Stream Goals/2021-11-02.md",
+    "Notes/three.js.md",
+    "Stream Goals.md",
+    "BRB.md"
   ]
 }
