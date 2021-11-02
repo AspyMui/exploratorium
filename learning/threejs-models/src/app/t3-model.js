@@ -1,24 +1,28 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Stats from 'three/examples/jsm/libs/stats.module';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from './three/OrbitControls';
+import Stats from './three/Stats';
+import { GLTFLoader } from './three/GLTFLoader';
 
+import shiba from './shiba/scene.gltf';
+import './shiba/scene/textures/default_baseColor.png';
 
 // TODO: Figure out how to import static files from parcel
 // TODO: Load static gltf file into GLTFLoader to get it into scene
 // NOTE: Docs: https://threejs.org/docs/index.html#manual/en/introduction/Loading-3D-models
 
-// const loader = new GLTFLoader();
-// loader.load(
-//   '/shiba',
-//   function (gltf) {
-//     scene.add(gltf.scene);
-//   },
-//   undefined,
-//   function (error) {
-//     console.error(error);
-//   }
-// );
+const loader = new GLTFLoader();
+loader.load(
+  shiba,
+  function (gltf) {
+    scene.add(gltf.scene);
+  },
+  function (xhr) {
+    console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+  },
+  function (error) {
+    console.error(error);
+  }
+);
 
 // Scene
 const scene = new THREE.Scene();
